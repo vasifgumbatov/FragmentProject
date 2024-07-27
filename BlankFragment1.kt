@@ -17,10 +17,8 @@ class BlankFragment1 : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_blank1, container, false)
-        return view
-
-
+        binding = FragmentBlank1Binding.inflate(inflater, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,7 +33,8 @@ class BlankFragment1 : Fragment() {
             binding?.button1?.setOnClickListener {
                 val blankFragment = BlankFragment2()
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.container, blankFragment)
+                    .replace(R.id.container, blankFragment::class.java, null)
+                    .addToBackStack(null)
                     .commit()
             }
 //        }

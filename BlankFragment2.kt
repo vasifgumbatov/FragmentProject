@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import com.vasifgumbatov.fragmentkotlin.databinding.FragmentBlank2Binding
 
 
@@ -18,15 +19,17 @@ class BlankFragment2 : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_blank2, container, false)
-        binding?.button2?.setOnClickListener {
-            val blankFragment2 = BlankFragment1()
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment2, blankFragment2)
-                .commit()
+        binding = FragmentBlank2Binding.inflate(inflater, container, false)
+        return binding?.root
 
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding?.button2?.setOnClickListener {
+            parentFragmentManager.popBackStack()
+            Toast.makeText(requireContext(), "Button 2", Toast.LENGTH_SHORT).show()
         }
-        return view
     }
 
     override fun onDestroyView() {
